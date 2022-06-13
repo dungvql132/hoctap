@@ -17,7 +17,7 @@
     "tsconfig-paths": "^4.0.0"
   },
   "_moduleAliases": {
-    "@src"      : "."
+    "@src"      : "./src"
   },
   "_moduleDirectories": ["node_modules_custom"]
 }
