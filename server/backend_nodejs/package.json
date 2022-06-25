@@ -4,20 +4,27 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^3.15.1",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "jsconfig.json": "^2.3.3",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "rand-id-generator": "^1.0.1"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16",
-    "prisma": "^3.15.1",
-    "tsconfig-paths": "^4.0.0"
+    "nodemon": "^2.0.16"
   },
   "_moduleAliases": {
-    "@src"      : "./src"
+    "@src": "./src"
   },
-  "_moduleDirectories": ["node_modules_custom"]
+  "_moduleDirectories": [
+    "node_modules_custom"
+  ]
 }

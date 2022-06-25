@@ -1,6 +1,18 @@
-console.log("backend by nodejs");
-require("module-alias/register")
+const express = require('express');
+const cors = require("cors")
+const bodyParser = require("body-parser")
+const app = express();
+const router = require("./src/routers")
+const {errorHandlerController} = require("./src/controllers/errorHandler")
+require("dotenv").config();
 
-// let {dung,lan} = require("./untils/constants")
-let {dung,lan} = require("@src/untils/constants")
-console.log(dung,lan);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
+
+app.use("/api",router)
+app.use(errorHandlerController)
+
+app.listen(process.env.PORT || 8080, function () {
+    console.log('server is running at port 8080')
+})
