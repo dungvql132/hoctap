@@ -1,0 +1,9 @@
+export const storeActions = {
+    CHANGE_THEME: "CHANGE THEME",
+    USER_LOGIN: "USER LOGIN",
+    USER_LOGOUT: "USER LOGOUT",
+    INITIALIZATION_USER : "INITIALIZATION USER",
+    SET_MENU_SELECT : 'SET MENU SELECT'
+}
+
+export default storeActions;

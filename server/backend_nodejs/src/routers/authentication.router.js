@@ -5,6 +5,9 @@ const express = require('express');
 const app = express();
 
 app.post("/login",validateUser,authenController.loginController)
+app.get("/login",(req,res)=>{
+    res.status(200).json({"dung":"hoho"})
+})
 app.post("/register",validateUser,authenController.registerController)
 
 module.exports = app

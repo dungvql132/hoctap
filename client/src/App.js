@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.sass'
+import React from 'react';
+import { ThemeProvider } from "styled-components"
+import {theme} from 'src/styles/theme';
+import {storeActions} from 'src/store/actions';
+import { connect } from 'react-redux'
+import {CommonRouter} from 'src/routers';
 
-function App() {
+
+function App(props) {
+  const { themeType, changeTheme } = props;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeProvider theme={theme[themeType]}>
+        <CommonRouter></CommonRouter>
+      </ThemeProvider>
+    </>
   );
 }
 
-export default App;
+const mapStatetoProps = (state) => {
+  return {
+    themeType: state['themeType']
+  }
+}
+
+const mapDispathtoProps = (dispath) => {
+  return {
+    changeTheme: (currentTheme) => {
+      dispath({
+        type: storeActions.CHANGE_THEME,
+        payload: currentTheme
+      })
+    }
+  }
+}
+
+export default connect(mapStatetoProps, mapDispathtoProps)(App);
