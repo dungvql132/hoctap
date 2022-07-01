@@ -4,9 +4,7 @@ import AuthenLayout from "src/pages/layout/AuthenLayout"
 export function RegisterPage() {
     return (
         <>
-            <AuthenLayout>
-                <RegisterForm></RegisterForm>
-            </AuthenLayout>
+            <RegisterForm></RegisterForm>
         </>
     )
 }

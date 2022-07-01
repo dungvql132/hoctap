@@ -1,4 +1,4 @@
-class ResponeAuthentication {
+class ResponseAuthentication {
     constructor({ accesstoken = '', refreshtoken = '', message = '' }) {
         this.accesstoken = accesstoken;
         this.refreshtoken = refreshtoken;
@@ -6,6 +6,14 @@ class ResponeAuthentication {
     }
 }
 
+class ResponseDefault {
+    constructor({ data = '', message = '' }) {
+        this.data = data;
+        this.message = message;
+    }
+}
+
 module.exports = {
-    ResponeAuthentication
+    ResponseAuthentication,
+    ResponseDefault
 }

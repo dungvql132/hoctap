@@ -1,15 +1,20 @@
-import { Route } from "react-router-dom";
 import LoginPage from "../pages/authentication/login.page";
 import RegisterPage from "../pages/authentication/register.page";
 import MainLayout from "../pages/layout/DefaultLayout";
 import MainHomePage from "../pages/main.home.page";
-import WebEngHomePage from "src/pages/webeng/webeng.home.page";
+import WebEng_HomePage from "src/pages/webeng/webeng.home.page";
+import WebEng_WordPage from "src/pages/webeng/webeng.word.page";
+import WebEng_WordDetailPage from "src/pages/webeng/webeng.worddetail.page";
+import { webEng } from "src/constants/menuList"
+import AuthenLayout from "src/pages/layout/AuthenLayout";
 
-function Routes({ path, header = false, Layout = MainLayout, Compoment = null }) {
+function Routes({ path, header = false, Layout = MainLayout, items = null,defaultSelect=null, Compoment = null }) {
     return {
         path,
         header,
         Layout,
+        items,
+        defaultSelect,
         Compoment
     }
 }
@@ -17,11 +22,13 @@ function Routes({ path, header = false, Layout = MainLayout, Compoment = null })
 export const pathRoutes = [
     Routes({
         path: "/login",
-        Compoment: LoginPage
+        Compoment: LoginPage,
+        Layout : AuthenLayout
     }),
     Routes({
         path: "/register",
-        Compoment: RegisterPage
+        Compoment: RegisterPage,
+        Layout : AuthenLayout
     }),
     Routes({
         path: "/",
@@ -29,13 +36,26 @@ export const pathRoutes = [
     }),
     Routes({
         path: "/webeng",
-        Compoment: WebEngHomePage
+        Compoment: WebEng_HomePage,
+        items: webEng
+    }),
+    Routes({
+        path: "/webeng/words",
+        Compoment: WebEng_WordPage,
+        items: webEng,
+        defaultSelect : "words"
+    }),
+    Routes({
+        path: "/webeng/words/:word",
+        Compoment: WebEng_WordDetailPage,
+        items: webEng,
+        defaultSelect : "words"
     }),
 ]
 
-export function toRoute({ Layout, Compoment }) {
+export function toRoute({ Layout, items,defaultSelect, Compoment }) {
     return (
-        <Layout>
+        <Layout items={items} defaultSelect={defaultSelect}>
             <Compoment></Compoment>
         </Layout>
     )

@@ -1,20 +1,22 @@
 require("module-alias/register")
-const dbErrorRegex = require("@src/untils/dbErrorRegex")
+const dbErrorRegex = require("@src/untils/errorRegex/dbErrorRegex")
+const controllErrorRegex = require("@src/untils/errorRegex/controllErrorRegex")
 
 function dberrorHandler(error, res) {
     if (dbErrorRegex.Duplicate_entry.test(error.message)) {
         const errorObject = /'([^']*)'/.exec(error.message)
-        return res.status(304).json(
+        return res.status(406).json(
             {
-                error: dbErrorRegex.Duplicate_entry,
-                message: `Duplicate entry at: ${errorObject[0]}`
-            });
+                error: `Duplicate entry at: ${errorObject[0]}`,
+                message: `${errorObject[0]} already exist`
+            }
+        );
     }
 
     if (dbErrorRegex.Cannot_found.test(error.message)) {
         return res.status(404).json(
             {
-                error: dbErrorRegex.Cannot_found,
+                error: error.message,
                 message: error.message
             }
         );
@@ -23,6 +25,14 @@ function dberrorHandler(error, res) {
 }
 
 function errorHandlerController(error, req, res, next) {
+    if (controllErrorRegex.Invalid_token.test(error.message)) {
+        return res.status(403).json(
+            {
+                error: error.message,
+                message: error.message
+            }
+        );
+    }
     return res.status(500).json({ error: "unknow error", message: error.message, controller: "yes" });
 }
 

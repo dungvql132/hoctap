@@ -1,12 +1,18 @@
+import styled from "styled-components";
 
-export function Header(){
+const Div = styled.div`
+    width: 100%;
+    height: 3rem;
+    background-color: white;
+    margin: 1rem 0;
+`
+
+export function Header() {
 
     return (
-        <>
-            <div>
-                header1
-            </div>
-        </>
+        <Div>
+            header1
+        </Div>
     )
 }
 

@@ -5,7 +5,7 @@ const initState = {
     user: "",
     islogin: false,
     themeType: "light",
-    menuSelect: null,
+    menuSelect: null
 }
 
 export const rootReducer = (state = initState, action) => {

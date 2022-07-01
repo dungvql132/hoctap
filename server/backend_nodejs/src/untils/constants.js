@@ -4,5 +4,9 @@ module.exports = {
     LOGIN_SUCCESSFULL:"login successfully",
     LOGIN_FAIL:"login fail",
     REGISTER_SUCCESSFULL:"register successfully",
-    REGISTER_FAIL:"register fail"
+    REGISTER_FAIL:"register fail",
+    GETALL_SUCCESSFULL:"get all successfully",
+    CREATE_SUCCESSFULL:"create successfully",
+    UPDATE_SUCCESSFULL:"update successfully",
+    DETELE_SUCCESSFULL:"delete successfully",
 }

@@ -10,8 +10,8 @@ const Div = styled.div`
 export function AuthenLayout({children}){
     return (
         <>
-            <Row gutter={[16,16]}>
-                <Col span={16}><Div></Div></Col>
+            <Row gutter={[0,8]}>
+                <Col span={15}><Div></Div></Col>
                 <Col span={8}>{children}</Col>
             </Row>
         </>

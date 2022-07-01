@@ -1,4 +1,4 @@
-export function WebEngHomePage() {
+export function WebEng_HomePage() {
     return (
         <>
             <div>
@@ -8,4 +8,4 @@ export function WebEngHomePage() {
     )
 }
 
-export default WebEngHomePage;
+export default WebEng_HomePage;
