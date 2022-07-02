@@ -40,15 +40,14 @@ export const DetailLink = () => {
     <Div>
       {details.map((element, index) => {
         return (
-          <>
+          <div key={index + ''}>
             <LinkElement
-              key={index + ''}
               onClick={() => { history.push(element.link) }}
             >
               {element.value}
             </LinkElement>
             {(index == details.length - 1) ? "" : " > "}
-          </>
+          </div>
         )
       })}
     </Div>

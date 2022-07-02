@@ -40,7 +40,7 @@ export const WordsDetailList = ({ wordsLst }) => {
             <hr style={{ width: "100%" }} />
             {wordsLst.map((value, index) => {
                 return (
-                    <>
+                    <div key={index + ""}>
                         <WordsDetail
                             word={value.word}
                             createat={value.createat}
@@ -48,9 +48,9 @@ export const WordsDetailList = ({ wordsLst }) => {
                             type={value.type}
                             englishmean={value.englishmean}
                             vietnammean={value.vietnammean}
-                            key={index + ""}>
+                            >
                         </WordsDetail>
-                    </>
+                    </div>
                 )
             })}
         </>

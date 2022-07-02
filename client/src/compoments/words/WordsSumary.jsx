@@ -9,11 +9,11 @@ const WordsSumaryDiv = styled.div`
     flex-direction: column;
 `
 
-export const WordsSumary = ({word,createat,lastupdated})=>{
+export const WordsSumary = ({ word, createat, lastupdated }) => {
     const history = useHistory();
     return (
         <WordsSumaryDiv>
-            <TitleButton onClick={()=>{
+            <TitleButton onClick={() => {
                 history.push(`/webeng/words/${word}`)
             }}>{word.toUpperCase()}</TitleButton>
             <hr style={{ width: "100%" }} />
@@ -23,11 +23,16 @@ export const WordsSumary = ({word,createat,lastupdated})=>{
     )
 }
 
-export const WordsSumaryList = ({wordsLst})=>{
+export const WordsSumaryList = ({ wordsLst }) => {
     return (
         <>
-            {wordsLst.map((value,index)=>{
-                return <WordsSumary word={value.word} createat={value.createat} lastupdated={value.lastupdated} key={index+""}></WordsSumary>
+            {wordsLst.map((value, index) => {
+                return (
+                    <div key={index + ""}>
+                        <WordsSumary word={value.word} createat={value.createat} lastupdated={value.lastupdated} >
+                        </WordsSumary>
+                    </div>)
+
             })}
         </>
     )

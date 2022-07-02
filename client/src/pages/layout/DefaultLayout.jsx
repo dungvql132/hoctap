@@ -19,7 +19,6 @@ export function DefaultLayout({ children,items, defaultSelect }) {
                         <Header />
                     </Row>
                     <Row gutter={[0, 32]}>
-                        {/* <DetailLink path={path}></DetailLink> */}
                         <DetailLink></DetailLink>
                         {children}
                     </Row>
