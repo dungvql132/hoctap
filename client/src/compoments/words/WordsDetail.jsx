@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { dateStringToString } from "src/untils/datehandle/datehandle"
 
 const WordsDetailDiv = styled.div`
     width: 100%;
@@ -11,20 +12,25 @@ const Title2 = styled.div`
     display: flex;
     white-space: pre-wrap;
     :first-child{
-        font-size: 18px;
+        font-size: 24px;
         font-weight: 400;
     }
 `
 
-export const WordsDetail = ({ word, type, englishmean, vietnammean, createat, lastupdated }) => {
+const Title1 = styled.div`
+    font-size: 32px;
+    font-weight: 500;
+`
+
+export const WordsDetail = ({ datas: { word, type, englishmean, vietnammean, createat, lastupdated } }) => {
     return (
         <WordsDetailDiv>
             <Title2>
                 <div>{word}</div>
-                <div>{type}</div>
             </Title2>
-            <div>{englishmean}</div>
-            <div>{vietnammean}</div>
+            <div>Type: {type}</div>
+            <div>- english signification: {englishmean}</div>
+            <div>- vietnam signification: {vietnammean}</div>
             <hr style={{ width: "100%" }} />
             <div>create at: {createat}</div>
             <div>lastupdated at: {lastupdated}</div>
@@ -32,27 +38,24 @@ export const WordsDetail = ({ word, type, englishmean, vietnammean, createat, la
     )
 }
 
-export const WordsDetailList = ({ wordsLst }) => {
-    console.log("words list: ",wordsLst);
+export const WordsDetailList = ({ datas:{wordsLst} }) => {
     return (
         <>
-            <div>{wordsLst[0] ? wordsLst[0].word :"UNKONW WORD"}</div>
+            <Title1>{wordsLst[0] ? wordsLst[0].word.toUpperCase() : "UNKONW WORD"}</Title1>
             <hr style={{ width: "100%" }} />
             {wordsLst.map((value, index) => {
                 return (
                     <div key={index + ""}>
                         <WordsDetail
-                            word={value.word}
-                            createat={value.createat}
-                            lastupdated={value.lastupdated}
-                            type={value.type}
-                            englishmean={value.englishmean}
-                            vietnammean={value.vietnammean}
-                            >
+                            datas={value}
+                        >
                         </WordsDetail>
+                        <hr style={{ width: "100%", marginBottom: "2rem" }} />
                     </div>
                 )
             })}
         </>
     )
 }
+
+export default WordsDetailList;

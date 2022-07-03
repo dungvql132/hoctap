@@ -35,7 +35,6 @@ export const DetailLink = () => {
       }
     });
   }
-  console.log("details: ",details);
   return (
     <Div>
       {details.map((element, index) => {

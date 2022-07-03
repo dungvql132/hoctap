@@ -5,10 +5,10 @@ import MainHomePage from "../pages/main.home.page";
 import WebEng_HomePage from "src/pages/webeng/webeng.home.page";
 import WebEng_WordPage from "src/pages/webeng/webeng.word.page";
 import WebEng_WordDetailPage from "src/pages/webeng/webeng.worddetail.page";
-import { webEng } from "src/constants/menuList"
+import { webEng,mainMenu } from "src/constants/menuList"
 import AuthenLayout from "src/pages/layout/AuthenLayout";
 
-function Routes({ path, header = false, Layout = MainLayout, items = null,defaultSelect=null, Compoment = null }) {
+function Routes({ path, header = false, Layout = MainLayout, items = mainMenu,defaultSelect=null, Compoment = null }) {
     return {
         path,
         header,
@@ -55,7 +55,7 @@ export const pathRoutes = [
 
 export function toRoute({ Layout, items,defaultSelect, Compoment }) {
     return (
-        <Layout items={items} defaultSelect={defaultSelect}>
+        <Layout datas={{items,defaultSelect}}>
             <Compoment></Compoment>
         </Layout>
     )

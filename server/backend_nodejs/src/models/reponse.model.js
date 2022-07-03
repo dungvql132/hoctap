@@ -13,7 +13,17 @@ class ResponseDefault {
     }
 }
 
+class ResponsePaging {
+    constructor({ data = '', message = '', totalPage = 0 ,totalElement= 0}) {
+        this.data = data;
+        this.message = message;
+        this.totalPage = totalPage;
+        this.totalElement = totalElement;
+    }
+}
+
 module.exports = {
     ResponseAuthentication,
-    ResponseDefault
+    ResponseDefault,
+    ResponsePaging
 }

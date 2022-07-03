@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
+
 export function WebEng_WordDetailPage() {
     const { word } = useParams();
     const [wordsLst,setWordsLst] = useState([])
@@ -13,9 +14,9 @@ export function WebEng_WordDetailPage() {
         })
     },[])
     return (
-        <>
-            <WordsDetailList wordsLst={wordsLst}></WordsDetailList>
-        </>
+        <div>
+            <WordsDetailList datas={{wordsLst}}></WordsDetailList>
+        </div>
     )
 }
 

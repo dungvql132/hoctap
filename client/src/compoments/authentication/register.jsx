@@ -1,5 +1,5 @@
 import { Form, Input, Button, message } from 'antd'
-import {registerAPI} from 'src/API/authentication'
+import { registerAPI } from 'src/API/authentication'
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import storeActions from 'src/store/actions'
@@ -41,11 +41,10 @@ const RowDiv = styled.div`
     align-items: center;
 `
 
-export function RegisterForm(props) {
+export function RegisterForm({ storeDatas: { user, isLogin }, storeActions: { userLogin } }) {
     const history = useHistory();
     const [form] = Form.useForm();
-    const [errorMessge,setErrorMessge] = React.useState('');
-    const {userLogin} = props;
+    const [errorMessge, setErrorMessge] = React.useState('');
     return (
         <Div>
             <WelcomeDiv>Welcome to Dung Website!!</WelcomeDiv>
@@ -58,15 +57,15 @@ export function RegisterForm(props) {
                 }}
                 onFinish={() => {
                     // console.log("finished ", form.getFieldsValue());
-                    registerAPI(form.getFieldsValue()).then((rs)=>{
+                    registerAPI(form.getFieldsValue()).then((rs) => {
                         userLogin({
-                            email : form.getFieldValue('email'),
-                            accesstoken : rs.data.accesstoken
+                            email: form.getFieldValue('email'),
+                            accesstoken: rs.data.accesstoken
                         })
                         setErrorMessge('')
                         history.push("/")
                     }).catch((error) => {
-                        message.error(error.response.data.message,3)
+                        message.error(error.response.data.message, 3)
                         setErrorMessge(error.response.data.message)
                     })
                 }}
@@ -80,7 +79,7 @@ export function RegisterForm(props) {
                 <Form.Item label="Password" name={"password"}>
                     <Input.Password placeholder="input password" />
                 </Form.Item>
-                <ErrorDiv style={{display:(errorMessge=='')?"none":"flex"}}>{errorMessge}</ErrorDiv>
+                <ErrorDiv style={{ display: (errorMessge == '') ? "none" : "flex" }}>{errorMessge}</ErrorDiv>
                 <Form.Item >
                     <Button type="primary" htmlType="submit">Submit</Button>
                 </Form.Item>
@@ -103,20 +102,24 @@ export function RegisterForm(props) {
 
 const mapStatetoProps = (state) => {
     return {
-      user: state['user'],
-      isLogin: state['isLogin']
+        datas: {
+            user: state['user'],
+            isLogin: state['isLogin']
+        }
     }
-  }
-  
-  const mapDispathtoProps = (dispath) => {
+}
+
+const mapDispathtoProps = (dispath) => {
     return {
-      userLogin: ({email,accesstoken}) => {
-        dispath({
-          type: storeActions.USER_LOGIN,
-          payload: {email,accesstoken}
-        })
-      }
+        actions: {
+            userLogin: ({ email, accesstoken }) => {
+                dispath({
+                    type: storeActions.USER_LOGIN,
+                    payload: { email, accesstoken }
+                })
+            }
+        }
     }
-  }
-  
-  export default connect(mapStatetoProps, mapDispathtoProps)(RegisterForm);
+}
+
+export default connect(mapStatetoProps, mapDispathtoProps)(RegisterForm);

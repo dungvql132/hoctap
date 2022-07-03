@@ -7,16 +7,16 @@ const HomeDiv = styled.div`
     background-color: white;
     padding: 10%;
     width: 100%;
-    display: flex;s
+    display: flex;
     #home{
-        color: ${props => props.theme.colors.primary};
+        color: ${props => props.theme.colors.primary} !important;
     :hover{
-        color: ${props => props.theme.colors.primary};
+        color: ${props => props.theme.colors.primary} !important;
     }
     }
 `
 
-export function Home({ size }) {
+export function Home() {
     const history = useHistory();
     return (
         <HomeDiv onClick={() => { history.push("/") }}>

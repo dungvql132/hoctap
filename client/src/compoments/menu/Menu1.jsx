@@ -22,9 +22,13 @@ const MenuDiv = styled.div`
   }
 `
 
-export const Menu1 = ({ items, mode, menuSelect, setMenuSelect, defautSelect }) => {
+export const Menu1 = ({
+  datas: { items, mode, defaultSelect },
+  storeDatas: { menuSelect },
+  storeActions: { setMenuSelect }
+}) => {
   useEffect(() => {
-    setMenuSelect(defautSelect)
+    setMenuSelect(defaultSelect)
   }, [])
   const history = useHistory();
   return (
@@ -48,17 +52,21 @@ export const Menu1 = ({ items, mode, menuSelect, setMenuSelect, defautSelect }) 
 
 const mapStatetoProps = (state) => {
   return {
-    menuSelect: state['menuSelect']
+    storeDatas: {
+      menuSelect: state['menuSelect']
+    }
   }
 }
 
 const mapDispathtoProps = (dispath) => {
   return {
-    setMenuSelect: (key) => {
-      dispath({
-        type: storeActions.SET_MENU_SELECT,
-        payload: key
-      })
+    storeActions: {
+      setMenuSelect: (key) => {
+        dispath({
+          type: storeActions.SET_MENU_SELECT,
+          payload: key
+        })
+      }
     }
   }
 }

@@ -1,25 +1,26 @@
 const { eliminate_NullObjectProperties, makeSetSql } = require("./makeQuery")
+const {LIMIT} = require("@src/untils/dbquery/queryAll")
+require("dotenv").config()
 
-const FIND_WORDS = ({ userID, word, group }) => {
+const FIND_WORDS = ({ userID, word, group, page, pagesize }) => {
     const sql = `
-    SELECT word.Word,word.Type,translate.Englishmean,translate.Vietnammean,word.createat,word.lastupdated
-    FROM word
-    INNER JOIN translate
-    ON word.translateID = translate.ID
-    Where word.userID = ? ${word ? 'AND word = ?':""}
-    ${group ? `Group by ${group}`:""};
+    SELECT *   FROM word
+    Where word.userID = ? ${word ? 'AND word = ?' : ""}
+    ${group ? `Group by ${group}` : ""}
+    order by createat
+    ${LIMIT({page, pagesize})};
     `
     return {
         sql,
-        value: eliminate_NullObjectProperties({ userID,word })
+        value: eliminate_NullObjectProperties({ userID, word })
     }
 }
 
-const CREATE_WORDS = ({ translateID, userID, word = '', type = '', status = 'private' }) => {
+const CREATE_WORDS = ({ englishmean, vietnammean, userID, word = '', type = '', status = 'private' }) => {
     return {
-        sql: `INSERT INTO word (translateID,userID,Word,Type,status)
-        VALUES (?, ?, ?, ?,?);`,
-        value: [translateID, userID, word, type, status]
+        sql: `INSERT INTO word (englishmean,vietnammean,userID,Word,Type,status)
+        VALUES (?, ?, ?, ?,?,?);`,
+        value: [englishmean, vietnammean, userID, word, type, status]
     }
 }
 

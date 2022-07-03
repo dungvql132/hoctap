@@ -3,15 +3,27 @@ const { fetchdb } = require("@src/services/fetchdb")
 const { CREATE_WORDS, UPDATE_WORDS, DELETE_WORDS, FIND_WORDS } = require("@src/untils/dbquery/querywords")
 const { CANNOT_FOUND_ERROR } = require("@src/untils/constants")
 const { lowercaseKeys, lowercaseKeysinArray } = require("@src/untils/handle/object.handle")
+const { COUNT_ROWS } = require("@src/untils/dbquery/queryAll")
+require("dotenv").config();
 
-const findWord = ({ userID, word, group }, callback) => {
-    fetchdb(FIND_WORDS({ userID, word, group }), (err, result) => {
+const findWord = ({ userID, word, group, page, pagesize }, callback) => {
+    fetchdb(FIND_WORDS({ userID, word, group, page, pagesize }), (err, result) => {
         if (err) return callback(err, null)
 
         if (result.length === 0) return callback(new Error(CANNOT_FOUND_ERROR), null)
-
+        const data = lowercaseKeysinArray(result);
         if (result.length !== 0) {
-            return callback(null, { data: lowercaseKeysinArray(result) });
+            return fetchdb(COUNT_ROWS({ databaseName: "word",group }), (err, result) => {
+                if (err) return callback(err, null)
+                if (result.length === 0) return callback(new Error(CANNOT_FOUND_ERROR), null)
+
+                if (result.length !== 0) {
+                    const totalElement = result.length;
+                    const mypagesize = (pagesize)? Number(pagesize):process.env.PAGE_SIZE;
+                    const totalPage = Math.ceil(totalElement/mypagesize);
+                    return callback(null, { data,totalPage, totalElement });
+                }
+            })
         }
     })
 }

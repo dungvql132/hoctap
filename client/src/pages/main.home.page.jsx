@@ -1,3 +1,5 @@
+import ChangePageButtonList from "src/compoments/table/ChangePageButtonList";
+
 export function MainHomePage() {
     return (
         <>
