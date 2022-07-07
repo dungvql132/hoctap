@@ -18,6 +18,9 @@ export const theme = {
                 "table-header": '#f3f2f7'
             },
         },
+        shadow:{
+            primary : 'rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;'
+        }
     },
     dark: {
         colors: {
@@ -38,6 +41,9 @@ export const theme = {
                 "table-header": '#343d55'
             },
         },
+        shadow:{
+            primary : 'rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;'
+        }
     },
 };
 

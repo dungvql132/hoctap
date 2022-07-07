@@ -1,4 +1,5 @@
 import { Form, Input, Button, message } from 'antd'
+import { Title1, Title2, ErrorDiv } from 'src/compoments/styled';
 import { loginAPI } from 'src/API/authentication'
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
@@ -17,23 +18,6 @@ const Div = styled.div`
         width: 100%;
     }
 `
-
-const WelcomeDiv = styled.div`
-    font-size: 18px;
-    margin-bottom: 2%;
-`
-
-const IntroduceDiv = styled.div`
-    font-size: 14px;
-    margin-bottom: 5%;
-`
-
-const ErrorDiv = styled.div`
-    font-size: 14px;
-    margin-bottom: 5%;
-    color: red;
-`
-
 const RowDiv = styled.div`
     display: flex;
     justify-content: space-between;
@@ -41,14 +25,14 @@ const RowDiv = styled.div`
     align-items: center;
 `
 
-export function LoginForm({ storeDatas: { user, isLogin }, storeActions: { userLogin } }) {
+export const LoginForm = ({ storeDatas: { user, isLogin }, storeActions: { userLogin } }) => {
     const history = useHistory();
     const [form] = Form.useForm();
     const [errorMessge, setErrorMessge] = React.useState('');
     return (
         <Div>
-            <WelcomeDiv>Welcome to Dung Website!!</WelcomeDiv>
-            <IntroduceDiv>Please sign-in to your account. </IntroduceDiv>
+            <Title1>Welcome to Dung Website!!</Title1>
+            <Title2>Please sign-in to your account. </Title2>
             <Form
                 layout={'vertical'}
                 form={form}
@@ -57,7 +41,7 @@ export function LoginForm({ storeDatas: { user, isLogin }, storeActions: { userL
                 }}
                 onFinish={() => {
                     // console.log("finished ", form.getFieldsValue());
-                    loginAPI(form.getFieldsValue()).then((rs) => { 
+                    loginAPI(form.getFieldsValue()).then((rs) => {
                         userLogin({
                             email: form.getFieldValue('email'),
                             accesstoken: rs.data.accesstoken

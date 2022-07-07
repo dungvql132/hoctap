@@ -5,13 +5,13 @@ import Menu1 from "src/compoments/menu/Menu1";
 import Home from "src/compoments/Home";
 import DetailLink from "src/compoments/Title/DetailLink";
 
-export function DefaultLayout({ children,datas:{items, defaultSelect} }) {
+export function DefaultLayout({ children, datas: { items, defaultSelect } }) {
     return (
         <>
             <Row gutter={[0, 16]}>
                 <Col span={4}>
                     <Home></Home>
-                    <Menu1 datas={{items,defaultSelect}} ></Menu1>
+                    <Menu1 datas={{ items, defaultSelect }} ></Menu1>
                 </Col>
                 <Col span={18} offset={1}>
                     <Row gutter={[0, 32]}>

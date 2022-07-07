@@ -1,12 +1,12 @@
-const COUNT_ROWS = ({ databaseName,group }) => {
+const makequery_COUNT_ROWS = ({ dbName,group }) => {
     return {
-        sql: `SELECT count(${databaseName}.id) as totalElement FROM ${databaseName}
+        sql: `SELECT count(${dbName}.id) as totalElement FROM ${dbName}
         ${group ? `Group by ${group}` : "Group by id"};`,
         value: []
     }
 }
 
-const LIMIT = ({page, pagesize}) => {
+const makequery_LIMIT = ({page, pagesize}) => {
     const size = (pagesize)? Number(pagesize):process.env.PAGE_SIZE;
     let start = 0;
     if(page) {
@@ -16,6 +16,6 @@ const LIMIT = ({page, pagesize}) => {
 }   
 
 module.exports = {
-    COUNT_ROWS,
-    LIMIT
+    makequery_COUNT_ROWS,
+    makequery_LIMIT
 }

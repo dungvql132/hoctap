@@ -1,5 +1,6 @@
 import { Form, Input, Button, message } from 'antd'
 import { registerAPI } from 'src/API/authentication'
+import { Title1,Title2,ErrorDiv } from 'src/compoments/styled';
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import storeActions from 'src/store/actions'
@@ -9,29 +10,14 @@ import React from 'react';
 const Div = styled.div`
     height: 100%;
     width: 100%;
-    padding: 0 15%;
+    padding-left: 15%;
+    padding-right: 10% ;
     display: flex;
     flex-direction: column;
     justify-content: center;
     .ant-form.ant-form-vertical{
         width: 100%;
     }
-`
-
-const WelcomeDiv = styled.div`
-    font-size: 18px;
-    margin-bottom: 2%;
-`
-
-const IntroduceDiv = styled.div`
-    font-size: 14px;
-    margin-bottom: 5%;
-`
-
-const ErrorDiv = styled.div`
-    font-size: 14px;
-    margin-bottom: 5%;
-    color: red;
 `
 
 const RowDiv = styled.div`
@@ -41,14 +27,14 @@ const RowDiv = styled.div`
     align-items: center;
 `
 
-export function RegisterForm({ storeDatas: { user, isLogin }, storeActions: { userLogin } }) {
+export const RegisterForm = ({ storeActions: { userLogin } }) => {
     const history = useHistory();
     const [form] = Form.useForm();
     const [errorMessge, setErrorMessge] = React.useState('');
     return (
         <Div>
-            <WelcomeDiv>Welcome to Dung Website!!</WelcomeDiv>
-            <IntroduceDiv>Create a new account for you now. </IntroduceDiv>
+            <Title1>Welcome to Dung Website!!</Title1>
+            <Title2>Create a new account for you now. </Title2>
             <Form
                 layout={'vertical'}
                 form={form}
@@ -102,7 +88,7 @@ export function RegisterForm({ storeDatas: { user, isLogin }, storeActions: { us
 
 const mapStatetoProps = (state) => {
     return {
-        datas: {
+        storeDatas: {
             user: state['user'],
             isLogin: state['isLogin']
         }
@@ -111,7 +97,7 @@ const mapStatetoProps = (state) => {
 
 const mapDispathtoProps = (dispath) => {
     return {
-        actions: {
+        storeActions: {
             userLogin: ({ email, accesstoken }) => {
                 dispath({
                     type: storeActions.USER_LOGIN,

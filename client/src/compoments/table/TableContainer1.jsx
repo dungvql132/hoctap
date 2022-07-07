@@ -5,6 +5,7 @@ import ChangePageButtonList from "./ChangePageButtonList";
 const TableContainerDiv = styled.div`
     height: auto;
     width: 100%;
+    box-shadow: ${props => props.theme.shadow.primary};
     .table-container{
         width: 100%;
     }
@@ -14,6 +15,7 @@ const TableContainerDiv = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 1rem 0;
     }
 `
 
@@ -30,11 +32,14 @@ export const TableContainer1 = ({ datas: { totalPage, selectPage, columnNumber }
     const colList = createColList(columnNumber);
     return (
         <TableContainerDiv>
+            <div className="button-list">
+                <ChangePageButtonList datas={{ selectPage, totalPage }} actions={{ setSelectPage }}></ChangePageButtonList>
+            </div>
             <div className="table-container">
                 {items.map((item, index) => {
                     if (index % columnNumber === 0) {
                         return (
-                            <Row key={index + ''}>
+                            <Row key={index + ''} justify="space-around">
                                 {colList.map((colValue, colIndex) => {
                                     return (
                                         <Col span={colSpan} key={colIndex + "col"}>

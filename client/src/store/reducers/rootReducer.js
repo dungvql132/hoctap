@@ -5,7 +5,8 @@ const initState = {
     user: "",
     islogin: false,
     themeType: "light",
-    menuSelect: null
+    menuSelect: null,
+    isModalVisible:false
 }
 
 export const rootReducer = (state = initState, action) => {
@@ -33,7 +34,12 @@ export const rootReducer = (state = initState, action) => {
         case storeActions.SET_MENU_SELECT:
             return {
                 ...state,
-                menuSelect : action.payload,
+                menuSelect: action.payload,
+            }
+        case storeActions.SET_MODAL_VISIBLE:
+            return {
+                ...state,
+                isModalVisible: action.payload,
             }
         default:
             return state

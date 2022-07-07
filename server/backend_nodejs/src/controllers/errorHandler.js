@@ -21,6 +21,16 @@ function dberrorHandler(error, res) {
             }
         );
     }
+
+    if (dbErrorRegex.Missing_coloum.test(error.message)) {
+        const errorObject = /'([^']*)'/.exec(error.message)
+        return res.status(404).json(
+            {
+                error: `Missing value at: ${errorObject[0]}`,
+                message: `${errorObject[0]} must be required`
+            }
+        );
+    }
     return res.status(500).json({ error: "unknow error", message: error.message });
 }
 
